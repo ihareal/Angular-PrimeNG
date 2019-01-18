@@ -1,0 +1,35 @@
+<div class="login" align="center">
+  <form action="" [formGroup]="formLogin" (ngSubmit)="onSubmit()">
+    <!-- <div *ngFor="let loginField of fields">
+      <app-input [name]="loginField" [inputForm]="managementFormLogin"></app-input>
+    </div> -->
+    <div align="center">
+      <p class="pInfo">Username: </p>
+      <div class="p-grid">
+        <div class="p-col">
+          <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon"></span>
+            <input formControlName="username" type="text" pInputText placeholder="login">
+          </div>
+        </div>
+      </div>
+      <p class="message" *ngIf="f.username.errors">Minimum 5 characters required for login</p>
+    </div>
+    <p class="pInfo">Password: </p>
+    <div class="p-grid">
+        <div class="p-col">
+          <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon"></span>
+    <input formControlName="password" type="password" pPassword placeholder="password" />
+    </div>
+    </div>
+    </div>
+    <p class="message" *ngIf="f.password.errors">Minimum 5 characters required for password</p>
+    <br>
+    <button type="submit" [disabled]="!formLogin.valid" routerLink="/table" pButton label="SubmitChanges" class="ui-button-rounded ui-button-success"></button>
+    <pre>
+          {{formLogin.value | json}}
+          {{formLogin.status | json}}
+    </pre>
+  </form>
+</div>

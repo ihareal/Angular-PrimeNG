@@ -1,0 +1,48 @@
+<!-- <form action="" [formGroup]="editForm">
+    <div class="center" align="center">
+        <div class="p-grid">
+           <div class="p-col">
+               <div class="ui-inputgroup">
+                   <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
+                   <input  formControlName="name" type="text" pInputText placeholder="Name">         
+               </div>
+           </div>            
+         </div>
+         <div class="p-grid">
+             <div class="p-col">
+                 <div class="ui-inputgroup">
+                     <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
+                     <input  formControlName="value" type="text" pInputText placeholder="Id">         
+                 </div>
+             </div>            
+           </div>
+           <div class="p-grid">
+               <div class="p-col">
+                   <div class="ui-inputgroup">
+                       <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
+                       <input  formControlName="type" type="text" pInputText placeholder="Value">         
+                   </div>
+               </div>            
+             </div>
+             <div class="p-grid">
+                 <div class="p-col">
+                     <div class="ui-inputgroup">
+                         <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
+                         <input  formControlName="fieldId" type="text" pInputText placeholder="Type">         
+                     </div>
+                 </div>            
+               </div>
+               <button pButton type="button" label="SubmitChanges" class="ui-button-rounded ui-button-warning"></button>
+             </div>
+            </form> -->
+<div class="editForm" align="center">
+<form [formGroup]="editForm" action="">
+  <div *ngFor="let editFields of fields">
+    <app-input [name]="editFields" [inputForm]="editForm"></app-input>
+  </div>
+  <button *ngIf="editForm.valid"  routerLink="/table" pButton type="button" label="SubmitChanges" class="ui-button-rounded ui-button-warning"></button>
+  <pre>
+      {{editForm.value | json}}
+  </pre>
+</form>
+</div>

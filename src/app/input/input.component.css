@@ -1,0 +1,16 @@
+.ui-float-label{
+    width: 400px;   
+  }
+  .center{
+      margin-top: 45vh;
+  }
+  .ui-inputgroup{
+      width: 150px !important;
+  }
+  
+  .inputPassword{
+      width: 600px !important;
+  }
+  .ui-button-rounded{
+      margin-left: 50px;
+  }

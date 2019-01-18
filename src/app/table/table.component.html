@@ -1,0 +1,83 @@
+<div  class="table" align="center">
+<p-table [value]="result" selectionMode="single" [(selection)]="selectedData" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="15">
+  <ng-template pTemplate="caption">
+      Data list
+  </ng-template>
+  <ng-template pTemplate="header">
+      <tr>
+          <th *ngFor="let col of cols" [pSortableColumn]="col.field">
+              {{col.header}}
+              <p-sortIcon [field]="col.field"></p-sortIcon>
+          </th>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-entity>
+      <tr [pSelectableRow]="rowData" (click)="showEditDialog(entity)">
+          <td (click)="click(col)" *ngFor="let col of cols; let i = index">
+              {{entity[col.field]}}
+          </td>
+      </tr>
+  </ng-template>
+  <!-- <ng-template pTemplate="summary" let-rowData>
+      <div style="text-align:left">
+          <button type="button" pButton icon="fa fa-plus" (click)="showDialogToAdd()" label="Add"></button>
+      </div>
+  </ng-template>     -->
+</p-table>
+</div>
+<br><br>
+
+        <div align="center" *ngIf="editView">      
+        <div *ngFor="let col of cols">
+            <app-input (click)="input()" [name]="col.field" [inputForm]="formOut"></app-input>
+        </div>
+        
+        <button (click)="save()" pButton type="button" label="save" class="ui-button-rounded ui-button-warning dngr "></button>
+        <button (click)="delete()" pButton type="button" label="delete" class="ui-button-rounded ui-button-danger dngr"></button>
+    </div>
+
+<p align="center">You're logged in with JWT</p>
+<div align="center">
+    Users from secure api end point:
+    <ul class="ul">
+        <li *ngFor="let user of users">{{user.firstName}} {{user.lastName}}</li>
+    </ul>
+</div>
+
+
+
+<!--Make another form-->
+<p-dialog header="Data details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '300px'}">
+  <div class="ui-g ui-fluid" *ngIf="data">
+      <div class="ui-g-12">
+          <div class="ui-g-4">
+              <label for="year">Name</label>
+          </div>
+          <div class="ui-g-8">
+              <input pInputText id="name" [(ngModel)]="data.name" />
+          </div>
+      </div>
+      <div class="ui-g-12">
+          <div class="ui-g-4">
+              <label for="brand">Number</label>
+          </div>
+          <div class="ui-g-8">
+              <input pInputText id="number" [(ngModel)]="data.number" />
+          </div>
+      </div>
+      <div class="ui-g-12">
+          <div class="ui-g-4">
+              <label for="color">Type</label>
+          </div>
+          <div class="ui-g-8">
+              <input pInputText id="type" [(ngModel)]="data.type" />
+          </div>
+      </div>
+  </div>
+  <p-footer>
+      <div class="ui-dialog-buttonpane ui-helper-clearfix">
+          <button type="button" pButton icon="fa fa-close" (click)="delete()" label="Delete"></button>
+          <button type="button" pButton icon="fa fa-check" (click)="save()" label="Save"></button>
+      </div>
+  </p-footer>
+</p-dialog> 
