@@ -26,12 +26,11 @@
 </p-table>
 </div>
 <br><br>
-
+            <!-- Own edit fields -->
         <div align="center" *ngIf="editView">      
         <div *ngFor="let col of cols">
             <app-input (click)="input()" [name]="col.field" [inputForm]="formOut"></app-input>
         </div>
-        
         <button (click)="save()" pButton type="button" label="save" class="ui-button-rounded ui-button-warning dngr "></button>
         <button (click)="delete()" pButton type="button" label="delete" class="ui-button-rounded ui-button-danger dngr"></button>
     </div>
@@ -54,7 +53,7 @@
               <label for="year">Name</label>
           </div>
           <div class="ui-g-8">
-              <input pInputText id="name" [(ngModel)]="data.name" />
+              <input pInputText id="name" [(ngModel)]="data.id" />
           </div>
       </div>
       <div class="ui-g-12">

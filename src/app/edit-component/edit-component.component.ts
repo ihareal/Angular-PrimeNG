@@ -10,7 +10,7 @@ import { makeAnimationEvent } from '@angular/animations/browser/src/render/share
 export class EditComponentComponent implements OnInit {
  constructor(private fb: FormBuilder) { }
   editForm: FormGroup;
-  fields = ['name', 'value', 'type', 'fieldId' ]
+  fields = ['name', 'value', 'type'];
   ngOnInit() {
     this.editForm = this.fb.group({});
   }

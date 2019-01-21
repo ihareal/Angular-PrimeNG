@@ -8,6 +8,7 @@ import { User } from '../_models/user';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from '../_services/authentication.service';
 import { LocalstorageService } from '../localstorage.service';
+import {Router} from '@angular/router';
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -22,7 +23,7 @@ export class TableComponent implements OnInit {
   editView: boolean;
   formOut: FormGroup;
   datalot: Data[];
-  data: Data = {};
+  data: Data;
   cols: any;
   stash: any[];
   result: any[];
@@ -31,7 +32,8 @@ export class TableComponent implements OnInit {
     private fb: FormBuilder,
     private userService: UserService,
     private autentificationService: AuthenticationService,
-    private localstorafeService: LocalstorageService
+    private localstorafeService: LocalstorageService,
+    private router: Router
     ) {
   }
   initTable() {
@@ -53,7 +55,6 @@ export class TableComponent implements OnInit {
     ];
   }
   ngOnInit() {
-    // this.localstorafeService.setInfo();
     this.initTable();
   }
   showDialogToAdd() {
@@ -70,11 +71,12 @@ export class TableComponent implements OnInit {
     }
 
     this.datalot = datalot;
-    this.data = {};
+    this.data = null;
     this.displayDialog = false;
     this.editView = false;
   }
-  delete() {
+  delete(entity: any) {
+    console.log(entity);
     this.data = null;
     let index = this.datalot.indexOf(this.selectedData);
     this.datalot = this.datalot.filter((val, i) => i != index);
@@ -82,7 +84,7 @@ export class TableComponent implements OnInit {
     this.editView = false;
   }
   onRowSelect(event) {
-    
+    // this.router.navigate(['/edit']);
     this.editView = true;
     this.newData = false;
     // this.data = this.cloneData(event.data);
@@ -113,10 +115,12 @@ export class TableComponent implements OnInit {
     return this.datalot.find(f => f.name === field).value;
   }
   showEditDialog(entity) {
+    // this.router.navigate(['/edit']);
+    console.log(entity.id, entity.name, entity.type, entity.number);
     this.data = entity;
     this.displayDialog = true;
   }
-  save(){
+  addsave() {
     ///service 
     this.initTable();
   }

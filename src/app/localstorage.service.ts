@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Table } from 'primeng/table';
 
 @Injectable({
   providedIn: 'root'
@@ -31,17 +32,17 @@ export class LocalstorageService {
     original.name = entity.name;
     original.type = entity.type;
     original.number = entity.number;
-    localStorage.setItem('type', JSON.stringify(tableInfo));
+    localStorage.setItem('type', JSON.stringify(this.setInfo()));
   }
   public deleteEntity(entityID) {
     const entities = this.getInfo();
-    let original = entities.find(e => e.id === entityID);
-    /// remove js array
-    localStorage.setItem('type', JSON.stringify(tableInfo));
+    const original = entities.find(e => e.id === entityID);
+    entities.splice(original, 1);
+    localStorage.setItem('type', JSON.stringify(this.setInfo()));
   }
   public createEntity(entity) {
     const entities = this.getInfo();
     entities.push(entity);
-    localStorage.setItem('type', JSON.stringify(tableInfo));
+    localStorage.setItem('type', JSON.stringify(this.setInfo()));
   }
 }
