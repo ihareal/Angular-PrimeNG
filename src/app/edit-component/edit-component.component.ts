@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, OnChanges, SimpleChanges, Input, AfterContentInit, ɵConsole } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnChanges, SimpleChanges, Input, AfterContentInit, ɵConsole, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { makeAnimationEvent } from '@angular/animations/browser/src/render/shared';
 import { LocalstorageService } from '../localstorage.service';
@@ -8,7 +8,7 @@ import { LocalstorageService } from '../localstorage.service';
   templateUrl: './edit-component.component.html',
   styleUrls: ['./edit-component.component.css']
 })
-export class EditComponentComponent implements OnInit, OnChanges {
+export class EditComponentComponent implements OnInit, OnChanges, AfterViewInit {
   constructor(
     private fb: FormBuilder,
     private localStorageService: LocalstorageService
@@ -28,11 +28,13 @@ export class EditComponentComponent implements OnInit, OnChanges {
     type: ['', Validators.required]
   });
   tableInfo = [{
-    id: 3,
     name: 'editName',
     number: 10,
     type: 'editType'
   }];
+  ngAfterViewInit() {
+ 
+  }
   ngOnInit() {
     this.setInputValues();
   }
@@ -70,12 +72,18 @@ export class EditComponentComponent implements OnInit, OnChanges {
 
   nameInput() {
     this.name =  this.editForm.controls.name.value;
+    this.tableInfo[0].name = this.editForm.controls.name.value;
+    console.log(this.tableInfo[0].name);
   }
   numberInput() {
     this.number = this.editForm.controls.number.value;
+    this.tableInfo[0].number = this.editForm.controls.number.value;
+    console.log(this.tableInfo[0].number);
   }
   typeInput() {
     this.type =  this.editForm.controls.name.value;
+    this.tableInfo[0].type = this.editForm.controls.type.value;
+    console.log(this.tableInfo[0].type);
   }
   setFieldValues() {
   }

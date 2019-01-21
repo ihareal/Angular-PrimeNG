@@ -15,7 +15,7 @@
       <div class="p-col">
         <div class="ui-inputgroup">
           <span class="ui-inputgroup-addon"></span>
-          <input [(ngModel)]="a" formControlName="name" type="text" pInputText placeholder="name">
+          <input (input)="nameInput()" formControlName="name" type="text" pInputText placeholder="name">
         </div>
       </div>
     </div>
@@ -32,7 +32,7 @@
       <div class="p-col">
         <div class="ui-inputgroup">
           <span class="ui-inputgroup-addon"></span>
-          <input (input)="typeInput" formControlName="type" type="text" pInputText placeholder="type">
+          <input (input)="typeInput()" formControlName="type" type="text" pInputText placeholder="type">
         </div>
       </div>
     </div>
