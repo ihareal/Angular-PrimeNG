@@ -1,48 +1,54 @@
-<!-- <form action="" [formGroup]="editForm">
-    <div class="center" align="center">
-        <div class="p-grid">
-           <div class="p-col">
-               <div class="ui-inputgroup">
-                   <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
-                   <input  formControlName="name" type="text" pInputText placeholder="Name">         
-               </div>
-           </div>            
-         </div>
-         <div class="p-grid">
-             <div class="p-col">
-                 <div class="ui-inputgroup">
-                     <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
-                     <input  formControlName="value" type="text" pInputText placeholder="Id">         
-                 </div>
-             </div>            
-           </div>
-           <div class="p-grid">
-               <div class="p-col">
-                   <div class="ui-inputgroup">
-                       <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
-                       <input  formControlName="type" type="text" pInputText placeholder="Value">         
-                   </div>
-               </div>            
-             </div>
-             <div class="p-grid">
-                 <div class="p-col">
-                     <div class="ui-inputgroup">
-                         <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
-                         <input  formControlName="fieldId" type="text" pInputText placeholder="Type">         
-                     </div>
-                 </div>            
-               </div>
-               <button pButton type="button" label="SubmitChanges" class="ui-button-rounded ui-button-warning"></button>
-             </div>
-            </form> -->
-<div class="editForm" align="center">
+<!-- <div class="editForm" align="center">
 <form [formGroup]="editForm" action="">
   <div *ngFor="let editFields of fields">
     <app-input [name]="editFields" [inputForm]="editForm"></app-input>
   </div>
-  <button *ngIf="editForm.valid"  routerLink="/table" pButton type="button" label="SubmitChanges" class="ui-button-rounded ui-button-warning"></button>
+  <button (click)="update()" *ngIf="editForm.valid"  routerLink="/table" pButton type="button" label="SubmitChanges" class="ui-button-rounded ui-button-warning"></button>
   <pre>
       {{editForm.value | json}}
   </pre>
 </form>
+</div> -->
+<div align="center" class="editForm">
+  <form [formGroup]="editForm" action="">
+    <div class="p-grid">
+      <div class="p-col">
+        <div class="ui-inputgroup">
+          <span class="ui-inputgroup-addon"></span>
+          <input [(ngModel)]="a" formControlName="name" type="text" pInputText placeholder="name">
+        </div>
+      </div>
+    </div>
+  
+    <div class="p-grid">
+      <div class="p-col">
+        <div class="ui-inputgroup">
+          <span class="ui-inputgroup-addon"></span>
+          <input (input)="numberInput()" formControlName="number"  type="text" pInputText placeholder="number">
+        </div>
+      </div>
+    </div>
+    <div class="p-grid">
+      <div class="p-col">
+        <div class="ui-inputgroup">
+          <span class="ui-inputgroup-addon"></span>
+          <input (input)="typeInput" formControlName="type" type="text" pInputText placeholder="type">
+        </div>
+      </div>
+    </div>
+    <p class="message" *ngIf="editForm.invalid">Minimum 5 characters required for submit changes</p>
+    <br>
+      <div class="row" align="center">
+            <button (click)="update()" [disabled]="editForm.invalid" routerLink="/table" pButton type="button" label="Update"
+            class="ui-button-rounded ui-button-warning"></button><br><br>
+            <button (click)="create()" routerLink="/table" pButton type="button" label="Add"
+            class="ui-button-rounded ui-button-success"></button>
+            <button (click)="delete()" routerLink="/table" pButton type="button" label="Delete"
+            class="ui-button-rounded ui-button-danger"></button>
+      </div> 
+    <pre>
+            {{editForm.value | json}}
+            {{editForm.status | json}}
+        </pre>
+  </form>
 </div>

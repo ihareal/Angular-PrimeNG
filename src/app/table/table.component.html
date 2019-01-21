@@ -13,9 +13,13 @@
   </ng-template>
   <ng-template pTemplate="body" let-entity>
       <tr [pSelectableRow]="rowData" (click)="showEditDialog(entity)">
-          <td (click)="click(col)" *ngFor="let col of cols; let i = index">
+          <td (click)="clickdd(entity)" *ngFor="let col of cols; let i = index">
               {{entity[col.field]}}
-          </td>
+              <div *ngIf="foreverFalse">
+                    <app-edit-component [entity]="entity" [entityId]="entity.id"></app-edit-component>
+              </div>
+              
+        </td>
       </tr>
   </ng-template>
   <!-- <ng-template pTemplate="summary" let-rowData>
@@ -27,13 +31,13 @@
 </div>
 <br><br>
             <!-- Own edit fields -->
-        <div align="center" *ngIf="editView">      
+        <!-- <div align="center" *ngIf="editView">      
         <div *ngFor="let col of cols">
             <app-input (click)="input()" [name]="col.field" [inputForm]="formOut"></app-input>
         </div>
         <button (click)="save()" pButton type="button" label="save" class="ui-button-rounded ui-button-warning dngr "></button>
         <button (click)="delete()" pButton type="button" label="delete" class="ui-button-rounded ui-button-danger dngr"></button>
-    </div>
+    </div> -->
 
 <p align="center">You're logged in with JWT</p>
 <div align="center">
@@ -42,7 +46,6 @@
         <li *ngFor="let user of users">{{user.firstName}} {{user.lastName}}</li>
     </ul>
 </div>
-
 
 
 <!--Make another form-->

@@ -17,14 +17,17 @@ import {Router} from '@angular/router';
 export class TableComponent implements OnInit {
   users: User[] = [];
 
+  foreverFalse = false;
   displayDialog: Boolean;
   selectedData: Data;
   newData: boolean;
   editView: boolean;
   formOut: FormGroup;
+  entityGetter: any;
   datalot: Data[];
   data: Data;
   cols: any;
+  entityId: any;
   stash: any[];
   result: any[];
   constructor(
@@ -40,11 +43,8 @@ export class TableComponent implements OnInit {
     // this.localstorafeService.setInfo();
     this.stash = this.localstorafeService.getInfo();
     this.result = Object.keys(this.stash).map(i => this.stash[i]);
-    for (let i = 0; i < this.result.length; i++) {
-       console.log(this.result[i]);
-    }
     this.userService.getAll().pipe(first()).subscribe(users => {
-      this.users = users;
+    this.users = users;
     });
     this.formOut = this.fb.group({});
     this.datalot = this.dataService.getData();
@@ -79,12 +79,11 @@ export class TableComponent implements OnInit {
     console.log(entity);
     this.data = null;
     let index = this.datalot.indexOf(this.selectedData);
-    this.datalot = this.datalot.filter((val, i) => i != index);
+    this.datalot = this.datalot.filter((val, i) => i !== index);
     this.displayDialog = false;
     this.editView = false;
   }
   onRowSelect(event) {
-    // this.router.navigate(['/edit']);
     this.editView = true;
     this.newData = false;
     // this.data = this.cloneData(event.data);
@@ -115,13 +114,16 @@ export class TableComponent implements OnInit {
     return this.datalot.find(f => f.name === field).value;
   }
   showEditDialog(entity) {
-    // this.router.navigate(['/edit']);
-    console.log(entity.id, entity.name, entity.type, entity.number);
+    this.entityGetter = entity;
+    // this.localstorafeService.createEntity(entity);
+    // this.localstorafeService.deleteEntity(entity.id);
+    // this.localstorafeService.updateEntity(entity);
+    // console.log(this.localstorafeService.readEntity(entity.id));
+    this.localstorafeService.getId(entity.id);
+    this.localstorafeService.getEntityFromTable(entity);
+    this.router.navigate(['/edit']);
     this.data = entity;
-    this.displayDialog = true;
+    this.displayDialog = false;
   }
-  addsave() {
-    ///service 
-    this.initTable();
-  }
+  clickdd(entity) {}
 }
