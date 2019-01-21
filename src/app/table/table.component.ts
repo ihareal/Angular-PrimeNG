@@ -35,6 +35,7 @@ export class TableComponent implements OnInit {
     ) {
   }
   initTable() {
+    // this.localstorafeService.setInfo();
     this.stash = this.localstorafeService.getInfo();
     this.result = Object.keys(this.stash).map(i => this.stash[i]);
     for (let i = 0; i < this.result.length; i++) {
@@ -74,21 +75,21 @@ export class TableComponent implements OnInit {
     this.editView = false;
   }
   delete() {
-    this.data = {};
+    this.data = null;
     let index = this.datalot.indexOf(this.selectedData);
     this.datalot = this.datalot.filter((val, i) => i != index);
     this.displayDialog = false;
     this.editView = false;
   }
   onRowSelect(event) {
-    debugger
+    
     this.editView = true;
     this.newData = false;
     // this.data = this.cloneData(event.data);
     this.displayDialog = true;
   }
   cloneData(d: Data) {
-    const data = {};
+    const data = null;
     for (let prop in d) {
       data[prop] = d[prop];
     }
