@@ -15,6 +15,7 @@
     margin-right: 135px;
     font-family: 'Muli';
 }
+
 @keyframes alertAnim {
     from {
         opacity:0;
@@ -36,3 +37,4 @@
   .ui-button-rounded{
       margin-left: 30px;
   }
+  

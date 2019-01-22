@@ -10,6 +10,7 @@ export class LocalstorageService {
   localEntityNumber: any[];
   localEntityType: any[];
   constructor() { }
+  // delete in future
   tableInfo = [{
     id: 0,
     name: 'name 1',
@@ -33,7 +34,8 @@ export class LocalstorageService {
     const currentEntity = allEntities.find(e => e.id === this.localId);
     return currentEntity;
   }
-  public updateEntity(entity) {
+  ////
+  public updateEntity(entity, id) {
     const entities = this.getInfo();
     const original = entities.find(e => e.id === this.localId);
     // original.name = entity.name;
@@ -42,9 +44,11 @@ export class LocalstorageService {
     entities.splice(this.localId, 1, entity);
     localStorage.setItem('type', JSON.stringify(entities));
   }
-  public deleteEntity() {
+  public deleteEntity(id) {
     const entities = this.getInfo();
-    entities.splice(this.localId, 1);
+    const entity = entities.find(e => e.id === id);
+    const index = entities.indexOf(entity);
+    entities.splice(index, 1);
     localStorage.setItem('type', JSON.stringify(entities));
   }
   public createEntity(entity) {
@@ -52,6 +56,7 @@ export class LocalstorageService {
     entities.push(entity);
     localStorage.setItem('type', JSON.stringify(entities));
   }
+  // add tipification getId:Entity
   public getId(entityID) {
     this.localId = entityID;
     const entities = this.getInfo();

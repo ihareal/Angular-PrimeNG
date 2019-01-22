@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter, OnChanges, SimpleChanges, Inpu
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { makeAnimationEvent } from '@angular/animations/browser/src/render/shared';
 import { LocalstorageService } from '../localstorage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-component',
@@ -10,33 +11,39 @@ import { LocalstorageService } from '../localstorage.service';
 })
 export class EditComponentComponent implements OnInit, OnChanges, AfterViewInit {
   constructor(
+    private router: Router,
     private fb: FormBuilder,
     private localStorageService: LocalstorageService
   ) { }
-  @Input() entity: string;
-  @Input() entityId: number;
   test = 'hello world';
   profileForm: FormGroup;
   name;
   number;
   type;
+  id;
+  editForm: FormGroup;
   fields = ['name', 'value', 'type'];
   info: any[];
-  editForm = this.fb.group({
-    name: ['', Validators.required],
-    number: ['', Validators.required],
-    type: ['', Validators.required]
-  });
+    // Make a typisation entityObject:Entity
+  entityObject;
   tableInfo = [{
     name: 'editName',
     number: 10,
     type: 'editType'
   }];
   ngAfterViewInit() {
- 
+    // this.tableInfo[0].name = this.localStorageService.localEntityObject.name;
+    // this.tableInfo[0].number = this.localStorageService.localEntityObject.number;
+    // this.tableInfo[0].type = this.localStorageService.localEntityObject.type;
   }
   ngOnInit() {
-    this.setInputValues();
+    this.id = this.router;
+    this.entityObject = this.localStorageService.getId(this.id);
+    this.editForm = this.fb.group({
+      name: [this.entityObject.name, Validators.required],
+      number: [this.entityObject.number, Validators.required],
+      type: [this.entityObject.type, Validators.required]
+    });
   }
   ngOnChanges(changes: SimpleChanges) {
     if (changes.editForm) {
@@ -46,18 +53,21 @@ export class EditComponentComponent implements OnInit, OnChanges, AfterViewInit 
     return console.log(this.editForm.controls);
   }
   update() {
-    this.localStorageService.updateEntity(this.tableInfo);
+    // let
+    // this.localStorageService.updateEntity();
+    this.router.navigate(['/table']);
   }
   create() {
-    this.localStorageService.setEntity(this.name, this.number, this.type);
     this.localStorageService.createEntity(this.tableInfo);
+    this.router.navigate(['/table']);
   }
   delete() {
     // const entities = this.localStorageService.getInfo();
     // const original = entities.find(e => e.id === 1);
     // entities.splice(original, 1);
     // localStorage.setItem('type', JSON.stringify(entities));
-    this.localStorageService.deleteEntity();
+    // this.localStorageService.deleteEntity();
+    this.router.navigate(['/table']);
   }
   setInputValues() {
     /// there will be entity fields instead of mock-up parametrs
@@ -73,17 +83,14 @@ export class EditComponentComponent implements OnInit, OnChanges, AfterViewInit 
   nameInput() {
     this.name =  this.editForm.controls.name.value;
     this.tableInfo[0].name = this.editForm.controls.name.value;
-    console.log(this.tableInfo[0].name);
   }
   numberInput() {
     this.number = this.editForm.controls.number.value;
     this.tableInfo[0].number = this.editForm.controls.number.value;
-    console.log(this.tableInfo[0].number);
   }
   typeInput() {
     this.type =  this.editForm.controls.name.value;
     this.tableInfo[0].type = this.editForm.controls.type.value;
-    console.log(this.tableInfo[0].type);
   }
   setFieldValues() {
   }

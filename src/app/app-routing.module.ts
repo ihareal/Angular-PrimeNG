@@ -9,11 +9,11 @@ import {AuthGuard} from './_authGuard/auth.guard';
 import {AuthGuardLogin} from './_authGuard/return.login.auth.guard';
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
-  {path: 'edit', component: EditComponentComponent},
+  {path: 'edit/:id', component: EditComponentComponent},
   {path: 'table', component: TableComponent, canActivate: [AuthGuard]},
   {path: 'home', component: HomeComponent},
   {path: 'edit', component: EditComponentComponent},
-  {path: '', redirectTo: 'home', pathMatch: 'full'},
+  {path: '', redirectTo: 'home', pathMatch: 'full'}
 
 ];
 

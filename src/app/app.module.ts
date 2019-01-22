@@ -25,6 +25,9 @@ import {fakeBackendProvider} from './fake-backend/fake-backend';
 import { JwtInterceptor } from './fake-backend/jwt.interceptor';
 import {ErrorInterceptor} from './fake-backend/error.interceptor';
 import { HomeComponent } from './home/home.component';
+import { AddComponent } from './add/add.component';
+import {OverlayPanelModule} from 'primeng/overlaypanel';
+import {ScrollPanelModule} from 'primeng/scrollpanel';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +37,7 @@ import { HomeComponent } from './home/home.component';
     InputComponent,
     TableComponent,
     HomeComponent,
+    AddComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,7 +52,9 @@ import { HomeComponent } from './home/home.component';
     SplitButtonModule,
     PasswordModule,
     DialogModule,
-    FormsModule
+    FormsModule,
+    OverlayPanelModule,
+    ScrollPanelModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

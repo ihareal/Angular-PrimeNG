@@ -8,7 +8,7 @@ import { User } from '../_models/user';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from '../_services/authentication.service';
 import { LocalstorageService } from '../localstorage.service';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -18,7 +18,7 @@ export class TableComponent implements OnInit {
   users: User[] = [];
 
   foreverFalse = false;
-  displayDialog: Boolean;
+
   selectedData: Data;
   newData: boolean;
   editView: boolean;
@@ -37,14 +37,14 @@ export class TableComponent implements OnInit {
     private autentificationService: AuthenticationService,
     private localstorafeService: LocalstorageService,
     private router: Router
-    ) {
+  ) {
   }
   initTable() {
-    // this.localstorafeService.setInfo();
+    this.localstorafeService.setInfo();
     this.stash = this.localstorafeService.getInfo();
     this.result = Object.keys(this.stash).map(i => this.stash[i]);
     this.userService.getAll().pipe(first()).subscribe(users => {
-    this.users = users;
+      this.users = users;
     });
     this.formOut = this.fb.group({});
     this.datalot = this.dataService.getData();
@@ -52,13 +52,12 @@ export class TableComponent implements OnInit {
       { field: 'name', header: 'Name' },
       { field: 'number', header: 'Number' },
       { field: 'type', header: 'Type' },
-    ];
+      ];
   }
   ngOnInit() {
     this.initTable();
   }
   showDialogToAdd() {
-    this.displayDialog = true;
     this.newData = true;
   }
 
@@ -72,22 +71,19 @@ export class TableComponent implements OnInit {
 
     this.datalot = datalot;
     this.data = null;
-    this.displayDialog = false;
     this.editView = false;
   }
   delete(entity: any) {
-    console.log(entity);
-    this.data = null;
-    let index = this.datalot.indexOf(this.selectedData);
-    this.datalot = this.datalot.filter((val, i) => i !== index);
-    this.displayDialog = false;
-    this.editView = false;
+    // console.log(entity);
+    // this.data = null;
+    // let index = this.datalot.indexOf(this.selectedData);
+    // this.datalot = this.datalot.filter((val, i) => i !== index);
+    // this.editView = false;
   }
   onRowSelect(event) {
     this.editView = true;
     this.newData = false;
     // this.data = this.cloneData(event.data);
-    this.displayDialog = true;
   }
   cloneData(d: Data) {
     const data = null;
@@ -108,10 +104,15 @@ export class TableComponent implements OnInit {
   clickTable(event: any) {
     console.warn(event);
   }
-  click(id){
+  click(id) {
   }
   getFieldValue(field: any) {
     return this.datalot.find(f => f.name === field).value;
+  }
+
+  deleteRow(id: number) {
+    console.log('deleted');
+    this.localstorafeService.deleteEntity(id);
   }
   showEditDialog(entity) {
     this.entityGetter = entity;
@@ -119,11 +120,15 @@ export class TableComponent implements OnInit {
     // this.localstorafeService.deleteEntity(entity.id);
     // this.localstorafeService.updateEntity(entity);
     // console.log(this.localstorafeService.readEntity(entity.id));
-    this.localstorafeService.getId(entity.id);
-    this.localstorafeService.getEntityFromTable(entity);
-    this.router.navigate(['/edit']);
-    this.data = entity;
-    this.displayDialog = false;
+    // this.localstorafeService.getId(entity.id);
+    // this.localstorafeService.getEntityFromTable(entity);
+    this.router.navigate([`/edit/${entity.id}`]);
+    // this.data = entity;
+    // this.displayDialog = false;
   }
-  clickdd(entity) {}
+
+  add() {
+    this.router.navigate(['/add']);
+  }
+  clickdd(entity) { }
 }

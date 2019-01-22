@@ -1,0 +1,39 @@
+<form [formGroup]="addForm" action="">
+        <div class="p-grid">
+          <div class="p-col">
+            <div class="ui-inputgroup">
+              <span class="ui-inputgroup-addon"></span>
+              <input (input)="nameInput()" formControlName="name" type="text" pInputText placeholder="name">
+            </div>
+          </div>
+        </div>
+      
+        <div class="p-grid">
+          <div class="p-col">
+            <div class="ui-inputgroup">
+              <span class="ui-inputgroup-addon"></span>
+              <input (input)="numberInput()" formControlName="number"  type="text" pInputText placeholder="number">
+            </div>
+          </div>
+        </div>
+        <div class="p-grid">
+          <div class="p-col">
+            <div class="ui-inputgroup">
+              <span class="ui-inputgroup-addon"></span>
+              <input (input)="typeInput()" formControlName="type" type="text" pInputText placeholder="type">
+            </div>
+          </div>
+        </div>
+        <p class="message" *ngIf="addForm.invalid">Minimum 5 characters required for submit changes</p>
+        <br>
+          <div class="row" align="center">
+                <button (click)="add()" [disabled]="editForm.invalid" routerLink="/table" pButton type="button" label="Add"
+                class="ui-button-rounded ui-button-warning"></button><br><br>
+                <button (click)="reset()" routerLink="/table" pButton type="button" label="Default values"
+                class="ui-button-rounded ui-button-danger"></button>
+          </div> 
+        <pre>
+                {{addForm.value | json}}
+                {{addForm.status | json}}
+            </pre>
+      </form>
