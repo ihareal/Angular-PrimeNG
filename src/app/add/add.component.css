@@ -16,7 +16,7 @@
     color: white;
     font-style: oblique;
     animation: 2s alertAnim forwards;
-    margin-left: 5%;
+    margin-left: calc(44% + 2px);
 }
 @keyframes alertAnim {
     from {
@@ -29,5 +29,12 @@
     }
 }
 .row{
-    margin-left:25px;
+    margin-left: 5%;
 }
+.formAlign{
+    margin-left: 45%;
+}
+/* .center{
+    margin-top: 45vh;
+    margin-left: 45%;
+} */
