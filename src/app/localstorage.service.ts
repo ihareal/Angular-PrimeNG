@@ -35,7 +35,7 @@ export class LocalstorageService {
     return currentEntity;
   }
   ////
-  public updateEntity(entity, id) {
+  public updateEntity(entity) {
     const entities = this.getInfo();
     const original = entities.find(e => e.id === this.localId);
     // original.name = entity.name;
@@ -61,8 +61,7 @@ export class LocalstorageService {
     this.localId = entityID;
     const entities = this.getInfo();
     const data = entities.find(i => i.id === this.localId);
-    this.localEntityObject = data;
-    return this.localEntityObject;
+    return data;
   }
   public getEntityFromTable(entity) {
     this.localEntityName = entity.name;

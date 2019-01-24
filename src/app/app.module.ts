@@ -28,6 +28,7 @@ import { HomeComponent } from './home/home.component';
 import { AddComponent } from './add/add.component';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
 import {ScrollPanelModule} from 'primeng/scrollpanel';
+import {TabViewModule} from 'primeng/tabview';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,7 +55,8 @@ import {ScrollPanelModule} from 'primeng/scrollpanel';
     DialogModule,
     FormsModule,
     OverlayPanelModule,
-    ScrollPanelModule
+    ScrollPanelModule,
+    TabViewModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

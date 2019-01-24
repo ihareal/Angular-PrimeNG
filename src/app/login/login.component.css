@@ -1,40 +1,61 @@
 @import url('https://fonts.googleapis.com/css?family=Muli:400,700');
-.login{
-    margin-top: 35vh;
-    font-family: 'Muli';
-}
-.message{
-    width: 10%;
-    background-color: brown;
-    color: white;
-    font-style: oblique;
-    animation: 2s alertAnim forwards;
-    /* font-family: 'Muli'; */
-}
-.pInfo{
-    margin-right: 135px;
-    font-family: 'Muli';
+
+.login {
+  margin-top: 35vh;
+  font-family: 'Muli';
 }
 
-@keyframes alertAnim {
-    from {
-        opacity:0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity:1;
-        transform: translateY(0);
-    }
+.message {
+  width: 10%;
+  background-color: brown;
+  color: white;
+  font-style: oblique;
+  animation: 2s alertAnim forwards;
+  /* font-family: 'Muli'; */
 }
-  .ui-inputgroup{
-      width: 150px !important;
-      margin-right:55px;
+
+.pInfo {
+  margin-right: 135px;
+  font-family: 'Muli';
+}
+
+::ng-deep .p_scroll{
+    border: none !important;
   }
   
-  .inputPassword{
-      width: 600px !important;
-  }
-  .ui-button-rounded{
-      margin-left: 30px;
+  ::ng-deep .p_scroll .ui-scrollpanel-wrapper {
+    border-right: 9px solid #e6eef1; 
   }
   
+  ::ng-deep .p_scroll .ui-scrollpanel-bar-y {
+
+    background: rgba(0, 88, 116, 0.2);
+    border-radius: 10px;
+    opacity: 1; 
+    transition: background-color .3s; 
+  }
+
+@keyframes alertAnim {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ui-inputgroup {
+  width: 150px !important;
+  margin-right: 55px;
+}
+
+.inputPassword {
+  width: 600px !important;
+}
+
+.ui-button-rounded {
+  margin-left: 30px;
+}

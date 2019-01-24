@@ -16,9 +16,8 @@ import { Router } from '@angular/router';
 })
 export class TableComponent implements OnInit {
   users: User[] = [];
-
+  id;
   foreverFalse = false;
-
   selectedData: Data;
   newData: boolean;
   editView: boolean;
@@ -40,7 +39,7 @@ export class TableComponent implements OnInit {
   ) {
   }
   initTable() {
-    this.localstorafeService.setInfo();
+    //this.localstorafeService.setInfo();
     this.stash = this.localstorafeService.getInfo();
     this.result = Object.keys(this.stash).map(i => this.stash[i]);
     this.userService.getAll().pipe(first()).subscribe(users => {
@@ -116,6 +115,7 @@ export class TableComponent implements OnInit {
   }
   showEditDialog(entity) {
     this.entityGetter = entity;
+    console.log(this.entityGetter.id);
     // this.localstorafeService.createEntity(entity);
     // this.localstorafeService.deleteEntity(entity.id);
     // this.localstorafeService.updateEntity(entity);
@@ -123,12 +123,14 @@ export class TableComponent implements OnInit {
     // this.localstorafeService.getId(entity.id);
     // this.localstorafeService.getEntityFromTable(entity);
     this.router.navigate([`/edit/${entity.id}`]);
+    this.id = this.localstorafeService.getId(entity.id).id;
+    this.entityGetter = this.localstorafeService.getEntityFromTable(entity);
     // this.data = entity;
     // this.displayDialog = false;
   }
-
   add() {
-    this.router.navigate(['/add']);
+    console.log();
+    this.router.navigate([`/add/${this.id}`]);
   }
   clickdd(entity) { }
 }

@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
-
+  index: number = 2;
 
   // user: any = '1232131';
   message = 'required';
@@ -63,4 +63,5 @@ export class LoginComponent implements OnInit {
   // tslint:disable-next-line:use-life-cycle-interface
   // ngOnChanges(changes: SimpleChanges): void {
   // }
+
 }
